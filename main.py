@@ -32,17 +32,6 @@ auth.set_access_token(access_token_key, access_token_secret)
 api = tweepy.API(auth)
 
 
-def print_info(tweet):
-    print('***************************')
-    print(('Tweet ID: ', tweet['id']))
-    print(('Post Time: ', tweet['created_at']))
-    print(('User Name: ', tweet['user']['screen_name']))
-    try:
-        print(('Tweet Text: ', (tweet['text'])))
-    except:
-        pass
-
-
 def main():
 
     for user in tweepy.Cursor(api.followers, screen_name="GreatPowerKyle").items():
