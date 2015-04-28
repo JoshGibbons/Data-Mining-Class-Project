@@ -1,7 +1,7 @@
-'''authours:
+'''Authors:
     Josh Gibbons
     David
-    Yun Nam
+    Yun Nam Lin
 '''
 
 import twitter
