@@ -13,5 +13,15 @@ def createGUI():
     myvar=Tkinter.Label(window,image = tkimage)
     myvar.place(x=0, y=0, relwidth=1, relheight=1)
 
+    #textbox
+    v = Tkinter.StringVar()
+    txtBox = Tkinter.Entry(window, textvariable = v)
+    txtBox.pack()
+    v.set("enter username")
+    txtBox.focus_set()
+    username = v.get()
+
+    print(username)
+
     #run
     window.mainloop()
