@@ -51,6 +51,8 @@ def main():
     print("hello")
     #for user in tweepy.Cursor(api.followers, screen_name="GreatPowerKyle").items():
     #    print user.screen_name
+    #for status in tweepy.Cursor(api.user_timeline, screen_name="GreatPowerKyle").items():
+    #  print status.text
 
 if __name__ == '__main__':
     main()
