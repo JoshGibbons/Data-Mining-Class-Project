@@ -15,25 +15,25 @@ import interface
 imp.reload(sys)
 sys.setdefaultencoding("utf-8")
 
-#Private keys
-consumer_key = authKeys.getA()
-consumer_secret = authKeys.getB()
-access_token_key = authKeys.getC()
-access_token_secret = authKeys.getD()
+def setAuthority():
+    #Private keys
+    consumer_key = authKeys.getA()
+    consumer_secret = authKeys.getB()
+    access_token_key = authKeys.getC()
+    access_token_secret = authKeys.getD()
 
-# OAuth process, using the keys and tokens
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token_key, access_token_secret)
+    # OAuth process, using the keys and tokens
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token_key, access_token_secret)
 
-# Creation of the actual interface, using authentication
-api = tweepy.API(auth)
-
-
-
+    # Creation of the actual interface, using authentication
+    api = tweepy.API(auth)
 
 def main():
 
+    setAuthority()
     interface.createGUI()
+
 
     #for user in tweepy.Cursor(api.followers, screen_name="GreatPowerKyle").items():
     #    print user.screen_name

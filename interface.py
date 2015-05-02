@@ -1,5 +1,6 @@
 import Tkinter
 from PIL import Image, ImageTk
+import main
 
 def createGUI():
     #create window
@@ -15,13 +16,19 @@ def createGUI():
 
     #textbox
     v = Tkinter.StringVar()
-    txtBox = Tkinter.Entry(window, textvariable = v)
+    txtBox = Tkinter.Entry(window, textvariable = v, width = 33,relief = 'flat')
     txtBox.pack()
-    v.set("enter username")
+    txtBox.place(x=840, y=254)
     txtBox.focus_set()
-    username = v.get()
-
-    print(username)
+    #event listener
+    txtBox.bind('<Return>', lambda event:handleEvent(v))
 
     #run
     window.mainloop()
+
+def handleEvent(v):
+    username = v.get()
+    print(username)
+
+    #clearScreen() function that will destroy our bird
+    #              and then present graphed data
