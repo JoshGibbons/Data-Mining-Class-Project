@@ -34,6 +34,9 @@ def main():
     setAuthority()
     interface.createGUI()
 
+def getUserData(username):
+    print(username)
+
 
     #for user in tweepy.Cursor(api.followers, screen_name="GreatPowerKyle").items():
     #    print user.screen_name
