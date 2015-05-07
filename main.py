@@ -29,6 +29,12 @@ auth.set_access_token(access_token_key, access_token_secret)
 # Creation of the api, using authentication
 api = tweepy.API(auth)
 
+#Global tweet text array
+tweets = []
+
+def sentiment(username):
+    print("in sentiment")
+
 def main():
 
     interface.createGUI()
@@ -36,11 +42,18 @@ def main():
 def getUserData(username):
     print(username)
 
+    #get our array setup for use
+    idx = 0
+    for status in tweepy.Cursor(api.user_timeline, screen_name=username).items():
+        tweets[idx] = status.text
+        idx += 1
+
+    sentiment(username)
 
     #for user in tweepy.Cursor(api.followers, screen_name="GreatPowerKyle").items():
     #    print user.screen_name
-    for status in tweepy.Cursor(api.user_timeline, screen_name="GreatPowerKyle").items():
-      print status.text
+
+
 
 if __name__ == '__main__':
     main()
