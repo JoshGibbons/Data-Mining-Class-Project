@@ -9,7 +9,7 @@ def createGUI():
     #create window
     window = Tkinter.Tk()
     window.geometry("1296x810+50+10")
-    window.title("Project name here");
+    window.title("Twitter Profiler");
 
     #background
     global img
@@ -47,8 +47,24 @@ def handleEvent(v, window, txtBox):
     img.place(x=0, y=0, relwidth=1, relheight=1)
 
     displayName(username, window)
-    main.getUserData(username)
+    main.getUserData(username, window)
 
 def displayName(username, window):
     name = Tkinter.Label(window, text= username, font=("arial", 28), bg = "#1a4d84", fg='white')
     name.place(x = 60, y = 40)
+
+def showDataWarning(window):
+    warning = Tkinter.Label(window,
+                            text = "*User may not have enough tweets for an accurate profile",
+                            font =("arail", 18),
+                            bg = "#1a4d84",
+                            fg = 'white')
+    warning.place(x = 60, y = 60)
+
+def displaySentScore(window, score):
+    warning = Tkinter.Label(window,
+                            text = score,
+                            font =("arail", 22),
+                            bg = "#1a4d84",
+                            fg = 'white')
+    warning.place(x = 60, y = 80)

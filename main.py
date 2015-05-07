@@ -10,6 +10,7 @@ import sys
 import json
 import authKeys
 import interface
+import sent
 
 #utf check
 imp.reload(sys)
@@ -29,26 +30,23 @@ auth.set_access_token(access_token_key, access_token_secret)
 # Creation of the api, using authentication
 api = tweepy.API(auth)
 
-#Global tweet text array
-tweets = []
 
-def sentiment(username):
-    print("in sentiment")
 
 def main():
-
     interface.createGUI()
 
-def getUserData(username):
+def getUserData(username, window):
     print(username)
 
-    #get our array setup for use
-    idx = 0
-    for status in tweepy.Cursor(api.user_timeline, screen_name=username).items():
-        tweets[idx] = status.text
-        idx += 1
+    tweets = []
+    #get our arrays setup
+    count = 0
+    if count < 500:
+        for status in tweepy.Cursor(api.user_timeline, screen_name=username).items():
+            tweets.append(status.text)
+            count += 1
 
-    sentiment(username)
+    sent.getSentiment(tweets, window)
 
     #for user in tweepy.Cursor(api.followers, screen_name="GreatPowerKyle").items():
     #    print user.screen_name
