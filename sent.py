@@ -27,7 +27,7 @@ def getSentiment(tweets, window):
     NEWtweets = []
     for line in tweets:
         items = line.split(',')
-        NEWtweets.append([items[1].lower().strip()])
+        NEWtweets.extend((items[1].lower().strip()))
 
     # Extract the vocabulary of keywords
     vocab = dict()

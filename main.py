@@ -11,6 +11,7 @@ import json
 import authKeys
 import interface
 import sent
+import basicInfo
 
 #utf check
 imp.reload(sys)
@@ -41,16 +42,13 @@ def getUserData(username, window):
     tweets = []
     #get our arrays setup
     count = 0
-    if count < 500:
+    if count < 100:
         for status in tweepy.Cursor(api.user_timeline, screen_name=username).items():
             tweets.append(status.text)
             count += 1
 
-    sent.getSentiment(tweets, window)
-
-    #for user in tweepy.Cursor(api.followers, screen_name="GreatPowerKyle").items():
-    #    print user.screen_name
-
+    basicInfo.showBasicInfo(username)
+    #sent.getSentiment(tweets, window)
 
 
 if __name__ == '__main__':
