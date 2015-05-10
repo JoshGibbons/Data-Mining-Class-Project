@@ -1,7 +1,8 @@
-'''Authors:
-    Josh Gibbons
-    David
-    Yun Nam Lin
+'''
+Authors:
+ Josh Gibbons
+ David Noftsier
+ Yun Nam Lin
 '''
 
 import tweepy
@@ -9,16 +10,19 @@ import imp
 import sys
 import json
 import authKeys
+import basic_and_general_info
+import write_and_read_objects
+import users_retweeted_most
 import interface
 import sent
 import basicInfo
 
-#utf check
+# utf check
 imp.reload(sys)
 sys.setdefaultencoding("utf-8")
 
 
-#Private keys
+# Private keys
 consumer_key = authKeys.getA()
 consumer_secret = authKeys.getB()
 access_token_key = authKeys.getC()
@@ -31,26 +35,43 @@ auth.set_access_token(access_token_key, access_token_secret)
 # Creation of the api, using authentication
 api = tweepy.API(auth)
 
-
+#username = 'gavinfree'
 
 def main():
-    interface.createGUI()
+ interface.createGUI() 
+
+ # This generates the 'tweet_objects.txt' and returns tweet_object_list
+ #tweet_object_list = write_and_read_objects.writeTweetObjectsToFile(api, username)
+
+ # Only used for testing (when you have previously generated 'tweet_objects.txt' don't exceed your access limit)
+ #tweet_object_list = write_and_read_objects.readJsonFile()
+ 
+ # Example for getting the statuses of tweet objects
+ #for tweet in tweet_object_list:
+  #print tweet["text"]
+  #pass
+ 
+ #basic_and_general_info.showBasicInfo(tweet_object_list)
+ #basic_and_general_info.showGeneralInfo(tweet_object_list) 
+
+ #users_retweeted_most.showUsersRetweetedMost(tweet_object_list)
 
 def getUserData(username, window):
-    print(username)
-
-    tweets = []
-    #get our arrays setup
-    count = 0
-    if count < 100:
-        for status in tweepy.Cursor(api.user_timeline, screen_name=username).items():
-            tweets.append(status.text)
-            count += 1
-
-    basicInfo.showBasicInfo(username)
-    #sent.getSentiment(tweets, window)
-
+ print(username)
+ # Storing a list of statuses
+ '''
+ tweetStatuses = []
+ count = 0
+ for tweet in tweet_object_list:
+  tweetStatuses.append(tweet['text'])
+  count += 1
+  if count > 99:
+   break
+ '''
+ 
+ #sent.getSentiment(tweetStatuses, window)
+ #for user in tweepy.Cursor(api.followers, screen_name = "GreatPowerKyle").items(): 
+  #print user.screen_name
 
 if __name__ == '__main__':
     main()
-
