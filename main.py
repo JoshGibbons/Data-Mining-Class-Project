@@ -40,24 +40,10 @@ api = tweepy.API(auth)
 def main():
  interface.createGUI() 
 
- # This generates the 'tweet_objects.txt' and returns tweet_object_list
- #tweet_object_list = write_and_read_objects.writeTweetObjectsToFile(api, username)
-
- # Only used for testing (when you have previously generated 'tweet_objects.txt' don't exceed your access limit)
- #tweet_object_list = write_and_read_objects.readJsonFile()
- 
- # Example for getting the statuses of tweet objects
- #for tweet in tweet_object_list:
-  #print tweet["text"]
-  #pass
- 
- #basic_and_general_info.showBasicInfo(tweet_object_list)
- #basic_and_general_info.showGeneralInfo(tweet_object_list) 
-
- #users_retweeted_most.showUsersRetweetedMost(tweet_object_list)
 
 def getUserData(username, window):
  print(username)
+
  # Storing a list of statuses
  '''
  tweetStatuses = []
@@ -68,9 +54,26 @@ def getUserData(username, window):
   if count > 99:
    break
  '''
+
+ # This generates the 'tweet_objects.txt' and returns tweet_object_list
+ #tweet_object_list = write_and_read_objects.writeTweetObjectsToFile(api, username)
+
+ # Only used for testing (when you have previously generated 'tweet_objects.txt' don't exceed your access limit)
+ #tweet_object_list = write_and_read_objects.readJsonFile()
+
+ # Example for getting the statuses of tweet objects
+ #for tweet in tweet_object_list:
+  #print tweet["text"]
+  #pass
+
+ #basic_and_general_info.showBasicInfo(tweet_object_list)
+ #basic_and_general_info.showGeneralInfo(tweet_object_list)
+
+ #users_retweeted_most.showUsersRetweetedMost(tweet_object_list)
+
  
  #sent.getSentiment(tweetStatuses, window)
- #for user in tweepy.Cursor(api.followers, screen_name = "GreatPowerKyle").items(): 
+ #for user in tweepy.Cursor(api.followers, screen_name = username).items():
   #print user.screen_name
 
 if __name__ == '__main__':
