@@ -41,7 +41,7 @@ def main():
 	# Switch between accessing the API or accessing the text file
 	offlineMode = True
 	# Switch between and using GUI or not
- 	useGUI = False
+ 	useGUI = False 
 	
 	if (offlineMode): # Access the stored tweet objects instead of API
 		if(useGUI):	# Start the GUI and access the tweet_objects.txt file
@@ -98,8 +98,8 @@ def getUserData(username, window):
 
 def nonGuiTesting(tweet_object_list):
 
-	#basic_and_general_info.showBasicInfo(tweet_object_list)
-	#basic_and_general_info.showGeneralInfo(tweet_object_list)
+	basic_and_general_info.showBasicInfo(tweet_object_list)
+	basic_and_general_info.showGeneralInfo(tweet_object_list)
 
 	#users_retweeted_most.showUsersRetweetedMost(tweet_object_list)
 	pass
