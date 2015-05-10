@@ -68,3 +68,4 @@ def displaySentScore(window, score):
                             bg = "#1a4d84",
                             fg = 'white')
     warning.place(x = 60, y = 80)
+
