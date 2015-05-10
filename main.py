@@ -1,8 +1,8 @@
 '''
 Authors:
- Josh Gibbons
- David Noftsier
- Yun Nam Lin
+	Josh Gibbons
+	David Noftsier
+	Yun Nam Lin
 '''
 
 import tweepy
