@@ -87,4 +87,8 @@ def getSentiment(tweets, window):
     print("Sentiment Score = ")
     print(sentScore)
 
+<<<<<<< HEAD
     interface.displaySentScore(window, sentScore)
+=======
+    interface.displaySentScore(window, sentScore)
+>>>>>>> 115987824a186a65a300aec5fd3679b4ec4391f8

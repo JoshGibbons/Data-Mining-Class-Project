@@ -10,12 +10,13 @@ import imp
 import sys
 import json
 import authKeys
-#import interface
-#import sent
 import basic_and_general_info
 import write_and_read_objects
 import users_retweeted_most
 # utf check
+import interface
+import sent
+import basicInfo
 imp.reload(sys)
 sys.setdefaultencoding("utf-8")
 
@@ -26,23 +27,31 @@ consumer_secret = authKeys.getB()
 access_token_key = authKeys.getC()
 access_token_secret = authKeys.getD()
 
-#OAuth process, using the keys and tokens
+# OAuth process, using the keys and tokens
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token_key, access_token_secret)
 
 # Creation of the api, using authentication
 api = tweepy.API(auth)
 
+<<<<<<< HEAD
 username = 'gavinfree'
 
 def main():
- #interface.createGUI()
+ '''
+ interface.createGUI()
 
- #def getUserData(username, window):
- #print(username)
+ def getUserData(username, window):
+ print(username)
 
- #statuses = [] # List of statuses
- #statuses.append(tweet.text) # Appends each status to the list of statuses
+ tweets = []
+ #get our arrays setup
+ count = 0
+ if count < 100:
+ for status in tweepy.Cursor(api.user_timeline, screen_name=username).items():
+  tweets.append(status.text)
+  count += 1
+ '''
 
  # This generates the 'tweet_objects.txt' and returns tweet_object_list
  tweet_object_list = write_and_read_objects.writeTweetObjectsToFile(api, username)
@@ -59,6 +68,7 @@ def main():
 
  users_retweeted_most.showUsersRetweetedMost(tweet_object_list)
 
+ #basicInfo.showBasicInfo(username)
  #sent.getSentiment(tweets, window)
 
  #for user in tweepy.Cursor(api.followers, screen_name = "GreatPowerKyle").items(): #print user.screen_name
