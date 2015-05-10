@@ -79,7 +79,7 @@ def showGeneralInfo(tweet_object_list):
 		print '\t\t\t%s' %hashtag
 	# Include number of occurrences? 
 	#for hashtag,occurrences in top_five_hashtags:
-	# print "%s is used %s times" %(hashtag,occurences)
+		#print "%s is used %s times" %(hashtag,occurences)
  
 	top_five_urls =  collections.Counter(urls).most_common(5)
 	print 'Top Five Websites Referenced: '
@@ -87,4 +87,4 @@ def showGeneralInfo(tweet_object_list):
 		print '\t\t\t%s' %url
 	# Include number of occurrences? 
 	#for url,occurrences in top_five_hashtags:
-		# print "%s is used %s times" %(url,occurrences)
+		#print "%s is used %s times" %(url,occurrences)

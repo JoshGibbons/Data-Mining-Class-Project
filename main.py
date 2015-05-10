@@ -98,10 +98,10 @@ def getUserData(username, window):
 
 def nonGuiTesting(tweet_object_list):
 
-	basic_and_general_info.showBasicInfo(tweet_object_list)
-	basic_and_general_info.showGeneralInfo(tweet_object_list)
+	#basic_and_general_info.showBasicInfo(tweet_object_list)
+	#basic_and_general_info.showGeneralInfo(tweet_object_list)
 
-	#users_retweeted_most.showUsersRetweetedMost(tweet_object_list)
+	users_retweeted_most.showUsersRetweetedMost(tweet_object_list)
 	pass
 
 
