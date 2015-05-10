@@ -37,16 +37,16 @@ username = 'gavinfree'
 
 def main():
  
- interface.createGUI()
+ #interface.createGUI()
  
- def getUserData(username, window):
-  print(username)
+ # def getUserData(username, window):
+ # print(username)
 
  # This generates the 'tweet_objects.txt' and returns tweet_object_list
  #tweet_object_list = write_and_read_objects.writeTweetObjectsToFile(api, username)
 
  # Only used for testing (when you have previously generated 'tweet_objects.txt' don't exceed your access limit)
- tweet_object_list = write_and_read_objects.readJsonFile()
+ #tweet_object_list = write_and_read_objects.readJsonFile()
  
  #for tweet in tweet_object_list:
   #print tweet["text"]
@@ -58,17 +58,18 @@ def main():
  #users_retweeted_most.showUsersRetweetedMost(tweet_object_list)
 
  # Storing a list of statuses
+
  '''
  tweetStatuses = []
  count = 0
  for tweet in tweet_object_list:
-  tweetStatuses.append(tweet[count]['text'])
+  tweetStatuses.append(tweet['text'])
   count += 1
   if count > 99:
    break
  '''
 
- #sent.getSentiment(tweets, window)
+ #sent.getSentiment(tweetStatuses, window)
 
  #for user in tweepy.Cursor(api.followers, screen_name = "GreatPowerKyle").items(): #print user.screen_name
 
