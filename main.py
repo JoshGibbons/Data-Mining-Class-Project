@@ -63,7 +63,8 @@ def main():
   '''
  
  #sent.getSentiment(tweetStatuses, window)
-
+ #for user in tweepy.Cursor(api.followers, screen_name = "GreatPowerKyle").items(): 
+  #print user.screen_name
  
  # Example for getting the statuses of tweet objects
  #for tweet in tweet_object_list:
@@ -74,8 +75,6 @@ def main():
  #basic_and_general_info.showGeneralInfo(tweet_object_list) 
 
  #users_retweeted_most.showUsersRetweetedMost(tweet_object_list)
-
- #for user in tweepy.Cursor(api.followers, screen_name = "GreatPowerKyle").items(): #print user.screen_name
 
 if __name__ == '__main__':
     main()
