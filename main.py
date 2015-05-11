@@ -34,12 +34,10 @@ auth.set_access_token(access_token_key, access_token_secret)
 # Creation of the api, using authentication
 api = tweepy.API(auth)
 
-#username = 'gavinfree'
-
 def main():
 
 	# Switch between accessing the API or accessing the text file
-	offlineMode = True
+	offlineMode = False 
 	# Switch between and using GUI or not
  	useGUI = False 
 	
@@ -55,9 +53,10 @@ def main():
 			interface.createGUI()
 		else:
 			# Just access the API
-			tweet_object_list = write_and_read_objects.writeTweetObjectsToFile(api, username)
-			nonGuiTesting(tweet_object_list)	
-
+			username = 'gavinfree'
+        	tweet_object_list = write_and_read_objects.writeTweetObjectsToFile(api, username)
+        	nonGuiTesting(tweet_object_list)	
+         
 
 
 def getUserData(username, window):
