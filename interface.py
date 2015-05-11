@@ -23,7 +23,7 @@ def createGUI():
     v = Tkinter.StringVar()
     txtBox = Tkinter.Entry(window, textvariable = v, width = 33,relief = 'flat')
     txtBox.pack()
-    txtBox.place(x=840, y=254)
+    txtBox.place(x=840, y=225)
     txtBox.focus_set()
     #event listener
     txtBox.bind('<Return>', lambda event:handleEventONLINE(v, window, txtBox))
@@ -49,7 +49,7 @@ def createOfflineGUI():
     v = Tkinter.StringVar()
     txtBox = Tkinter.Entry(window, textvariable = v, width = 33,relief = 'flat')
     txtBox.pack()
-    txtBox.place(x=840, y=254)
+    txtBox.place(x=840, y=225)
     txtBox.focus_set()
     #event listener
     txtBox.bind('<Return>', lambda event:handleEventOFFLINE(window, txtBox))
@@ -137,3 +137,16 @@ def displayGenInfo(window, freqTweet, freqCount, tags, sites):
     siteText.place(x=60, y = 360)
     site = Tkinter.Label(window, text=(sites), font=("arial", 18), bg="#1a4d84", fg="white")
     site.place(x=280, y = 360)
+
+def display(window):
+    load = Image.open('wordcloud/cloud1.png')
+    render =ImageTk.PhotoImage(load)
+    img = Tkinter.Label(window,image = render)
+    img.image = render
+    img.place(x=5, y=500)
+
+    load = Image.open('wordcloud/cloud2.png')
+    render =ImageTk.PhotoImage(load)
+    img = Tkinter.Label(window,image = render)
+    img.image = render
+    img.place(x=800, y=500)
