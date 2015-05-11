@@ -1,3 +1,4 @@
+from __future__ import division
 import interface
 from sklearn.linear_model import LogisticRegression
 from sklearn import svm
@@ -8,26 +9,25 @@ from sklearn.grid_search import GridSearchCV
 import json
 
 
-def getSentiment(tweets, window):
 
-    negativSet = open("Negtweets.txt")
-    sentWords = []
-    for line in negativSet:
-        sentWords.extend(('negative', line))
+def getSentiment(tweetObjs, window):
 
-    positiveSet = open("POStweets.txt")
-    for line in negativSet:
-        sentWords.extend(('positive', line))
+    '''
+    tweets = []
+    for line in open('NegTweets.txt').readlines():
+        items = line.split(',')
+        tweets.append([(int)(0), (str)(items[0].lower().strip())])
 
-    negativSet.close()
-    positiveSet.close()
-
+    for line in open("Postweets.txt").readlines():
+        items = line.split(',')
+        tweets.append([(int)(1), (str)(items[0].lower().strip())])
+    '''
     stopwords = ["a", "about", "above", "above", "across", "after", "afterwards", "again", "against", "all", "almost", "alone", "along", "already", "also","although","always","am","among", "amongst", "amoungst", "amount",  "an", "and", "another", "any","anyhow","anyone","anything","anyway", "anywhere", "are", "around", "as",  "at", "back","be","became", "because","become","becomes", "becoming", "been", "before", "beforehand", "behind", "being", "below", "beside", "besides", "between", "beyond", "bill", "both", "bottom","but", "by", "call", "can", "cannot", "cant", "co", "con", "could", "couldnt", "cry", "de", "describe", "detail", "do", "done", "down", "due", "during", "each", "eg", "eight", "either", "eleven","else", "elsewhere", "empty", "enough", "etc", "even", "ever", "every", "everyone", "everything", "everywhere", "except", "few", "fifteen", "fify", "fill", "find", "fire", "first", "five", "for", "former", "formerly", "forty", "found", "four", "from", "front", "full", "further", "get", "give", "go", "had", "has", "hasnt", "have", "he", "hence", "her", "here", "hereafter", "hereby", "herein", "hereupon", "hers", "herself", "him", "himself", "his", "how", "however", "hundred", "ie", "if", "in", "inc", "indeed", "interest", "into", "is", "it", "its", "itself", "keep", "last", "latter", "latterly", "least", "less", "ltd", "made", "many", "may", "me", "meanwhile", "might", "mill", "mine", "more", "moreover", "most", "mostly", "move", "much", "must", "my", "myself", "name", "namely", "neither", "never", "nevertheless", "next", "nine", "no", "nobody", "none", "noone", "nor", "not", "nothing", "now", "nowhere", "of", "off", "often", "on", "once", "one", "only", "onto", "or", "other", "others", "otherwise", "our", "ours", "ourselves", "out", "over", "own","part", "per", "perhaps", "please", "put", "rather", "re", "same", "see", "seem", "seemed", "seeming", "seems", "serious", "several", "she", "should", "show", "side", "since", "sincere", "six", "sixty", "so", "some", "somehow", "someone", "something", "sometime", "sometimes", "somewhere", "still", "such", "system", "take", "ten", "than", "that", "the", "their", "them", "themselves", "then", "thence", "there", "thereafter", "thereby", "therefore", "therein", "thereupon", "these", "they", "thickv", "thin", "third", "this", "those", "though", "three", "through", "throughout", "thru", "thus", "to", "together", "too", "top", "toward", "towards", "twelve", "twenty", "two", "un", "under", "until", "up", "upon", "us", "very", "via", "was", "we", "well", "were", "what", "whatever", "when", "whence", "whenever", "where", "whereafter", "whereas", "whereby", "wherein", "whereupon", "wherever", "whether", "which", "while", "whither", "who", "whoever", "whole", "whom", "whose", "why", "will", "with", "within", "without", "would", "yet", "you", "your", "yours", "yourself", "yourselves", "the"]
 
-    NEWtweets = []
-    for line in tweets:
+    tweets = []
+    for line in open('training_tweets.txt').readlines():
         items = line.split(',')
-        NEWtweets.extend((items[1].lower().strip()))
+        tweets.append([int(items[0]), items[1].lower().strip()])
 
     # Extract the vocabulary of keywords
     vocab = dict()
@@ -39,16 +39,15 @@ def getSentiment(tweets, window):
                     vocab[term] = vocab[term] + 1
                 else:
                     vocab[term] = 1
-
     # Remove terms whose frequencies are less than a threshold (e.g., 15)
-    vocab = {term: freq for term, freq in vocab.items() if freq > 15}
+    vocab = {term: freq for term, freq in vocab.items() if freq > 5}
     # Generate an id (starting from 0) for each term in vocab
     vocab = {term: idx for idx, (term, freq) in enumerate(vocab.items())}
 
     # Generate X and y
     X = []
     y = []
-    for class_label, text in NEWtweets:
+    for class_label, text in tweets:
         x = [0] * len(vocab)
         terms = [term for term in text.split() if len(term) > 2]
         for term in terms:
@@ -63,9 +62,9 @@ def getSentiment(tweets, window):
 
     # predict the class labels of new tweets
     #print clf.predict(X)
-    tweets2 = []
-    for line in tweets:
-        tweets2.append(line)
+    tweets = []
+    for text in tweetObjs:
+        tweets.append((str)(text["text"]))
 
     # Generate X for testing tweets
     X = []
@@ -77,14 +76,12 @@ def getSentiment(tweets, window):
                 x[vocab[term]] += 1
         X.append(x)
     y = clf.predict(X)
-    #lr.predict_proba(X) will return you the predict probabilities
 
     #Calculate average sent score
     totalPosTweets = 0
-    for idx in range(1,len(tweets2)):
-        totalPosTweets += y[idx]
-    sentScore = totalPosTweets/len(tweets2)
-    print("Sentiment Score = ")
-    print(sentScore)
+    for idx in range(1, len(y)):
+        totalPosTweets += (int)(y[idx])
 
-    interface.displaySentScore(window, sentScore)
+    sentScore = totalPosTweets/len(y)
+    print "Sentiment Score = ", totalPosTweets, " / " , len(y), " = ", sentScore
+    interface.displaySentScore(sentScore, window)

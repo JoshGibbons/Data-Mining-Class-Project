@@ -1,7 +1,7 @@
 import json
 import collections
 
-def showUsersRetweetedMost(tweet_object_list):
+def showUsersRetweetedMost(tweet_object_list, window):
 
     retweets = []
     retweetees = [] 

@@ -15,6 +15,7 @@ import write_and_read_objects
 import users_retweeted_most
 import interface
 import sent
+import cloud
 
 # utf check
 imp.reload(sys)
@@ -34,76 +35,47 @@ auth.set_access_token(access_token_key, access_token_secret)
 # Creation of the api, using authentication
 api = tweepy.API(auth)
 
-def main():
 
-	# Switch between accessing the API or accessing the text file
-	offlineMode = False 
-	# Switch between and using GUI or not
- 	useGUI = False 
-	
-	if (offlineMode): # Access the stored tweet objects instead of API
-		if(useGUI):	# Start the GUI and access the tweet_objects.txt file
-			interface.createGUI()
-		else: # Just access the stored tweet objects
-			tweet_object_list = write_and_read_objects.readJsonFile()
-			nonGuiTesting(tweet_object_list)	
-	
-	else: # Access the API, generate tweet_objects.txt
-		if(useGUI): # Start the GUI
-			interface.createGUI()
-		else:
-			# Just access the API
-			username = 'gavinfree'
-        		tweet_object_list = write_and_read_objects.writeTweetObjectsToFile(api, username)
-        		nonGuiTesting(tweet_object_list)	
+def main():
+    #Switch between accessing the API or accessing the text file
+    onlineMode = True
+
+    if(onlineMode): # Access the stored tweet objects instead of API
+        interface.createGUI()
+    else: # Just access the stored tweet objects
+        interface.createOfflineGUI()
          
 
-
 def getUserData(username, window):
-	print(username)
 
-	# Storing a list of statuses
-	'''
-	tweetStatuses = []
-	count = 0
-	for tweet in tweet_object_list:
-		tweetStatuses.append(tweet['text'])
-		count += 1
-		if count > 99:
-  			break
-	'''
+    tweet_object_list = write_and_read_objects.writeTweetObjectsToFile(api, username)
 
-	# This generates the 'tweet_objects.txt' and returns tweet_object_list
-	#tweet_object_list = write_and_read_objects.writeTweetObjectsToFile(api, username)
+    basic_and_general_info.showBasicInfo(tweet_object_list, window)
+    basic_and_general_info.showGeneralInfo(tweet_object_list, window)
 
-	# Only used for testing (when you have previously generated 'tweet_objects.txt' don't exceed your access limit)
-	#tweet_object_list = write_and_read_objects.readJsonFile()
+    sent.getSentiment(tweet_object_list, window)
 
-	# Example for getting the statuses of tweet objects
-	#for tweet in tweet_object_list:
-	#print tweet["text"]
-	#pass
+    users_retweeted_most.showUsersRetweetedMost(tweet_object_list, window)
 
-	#basic_and_general_info.showBasicInfo(tweet_object_list)
-	#basic_and_general_info.showGeneralInfo(tweet_object_list)
-
-	#users_retweeted_most.showUsersRetweetedMost(tweet_object_list)
-
- 
-	#sent.getSentiment(tweetStatuses, window)
-	#for user in tweepy.Cursor(api.followers, screen_name = username).items():
-		#print user.screen_name
+    #cloud.makeCloud(tweet_object_list, window)
 
 
-def nonGuiTesting(tweet_object_list):
-
-	#basic_and_general_info.showBasicInfo(tweet_object_list)
-	#basic_and_general_info.showGeneralInfo(tweet_object_list)
-
-	users_retweeted_most.showUsersRetweetedMost(tweet_object_list)
-	pass
 
 
+def getUserDataOFFLINE(window):
+
+
+    username = 'gavinfree'
+    tweet_object_list = write_and_read_objects.readJsonFile()
+
+    basic_and_general_info.showBasicInfo(tweet_object_list, window)
+    basic_and_general_info.showGeneralInfo(tweet_object_list, window)
+
+    sent.getSentiment(tweet_object_list, window)
+
+    users_retweeted_most.showUsersRetweetedMost(tweet_object_list, window)
+
+    #cloud.makeCloud(tweet_object_list, window)
 
 if __name__ == '__main__':
 	main()
