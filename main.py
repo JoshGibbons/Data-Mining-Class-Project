@@ -54,8 +54,8 @@ def main():
 		else:
 			# Just access the API
 			username = 'gavinfree'
-        	tweet_object_list = write_and_read_objects.writeTweetObjectsToFile(api, username)
-        	nonGuiTesting(tweet_object_list)	
+        		tweet_object_list = write_and_read_objects.writeTweetObjectsToFile(api, username)
+        		nonGuiTesting(tweet_object_list)	
          
 
 
